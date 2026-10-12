@@ -1,0 +1,22 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: inventory-route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/inventory,/inventory/**
+
+            - id: shipping-route
+              uri: http://localhost:8082
+              predicates:
+                - Path=/shipping,/shipping/**
